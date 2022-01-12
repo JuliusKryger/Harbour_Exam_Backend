@@ -1,7 +1,9 @@
 package facades;
 
+import dtos.BoatDTO;
 import dtos.OwnerDTO;
 import dtos.OwnersDTO;
+import entities.Boat;
 import entities.Owner;
 
 import javax.persistence.EntityManager;
@@ -42,6 +44,25 @@ public class HarbourFacade {
             em.close();
         }
     }
+
+    public Boat createBoat (Boat boat) {
+        EntityManager em = emf.createEntityManager();
+        try {
+        em.getTransaction().begin();
+
+        boat.setName(boat.getName());
+        boat.setBrand(boat.getBrand());
+        boat.setMake(boat.getMake());
+
+        em.persist(boat);
+        em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return boat;
+    }
+
 
 
 
